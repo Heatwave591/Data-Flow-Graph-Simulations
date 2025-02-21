@@ -82,7 +82,7 @@ def main():
         (3, 1, -5),
         (4, 1, -5)
     ]
-    r = 1  
+    r = 3
     
     W = create_weight_matrix(u, edges)
     print_weight_matrix(W)
