@@ -72,17 +72,16 @@ def print_weight_matrix(W):
 
 def main():
 
-    u = 4  
-    v = 6  
+    u = 3  # nodes 
+    v = 4  # links
     edges = [
         (1, 2, 0),
         (2, 3, 0),
-        (3, 4, 0),
-        (2, 1, -4),
         (3, 1, -5),
-        (4, 1, -5)
+        (2, 1, -5),
+        (1, 1, -4)
     ]
-    r = 3
+    r = 1
     
     W = create_weight_matrix(u, edges)
     print_weight_matrix(W)
