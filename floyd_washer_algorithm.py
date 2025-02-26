@@ -50,14 +50,12 @@ def generate_matrices_fixed_final(R1, n):
 
 # Define the input matrix
 inf = np.inf
-n = 6
+n = 4
 R1 = np.array([
-    [inf, inf,  3,   2,   2,   inf],
-    [1,   inf,  1,   inf, inf, inf],
-    [inf, inf,  inf, -1,  inf, inf],
-    [inf, inf,  inf, inf, inf, inf],
-    [inf, inf, -6,  -2,  inf, inf],
-    [0,   0,   0,   0,   0,   inf]
+    [inf, inf, 1, inf],
+    [3, inf, 2, inf],
+    [-1, inf, inf, inf],
+    [0, 0, 0, inf]
 ])
 
 # Generate matrices R2 to Rn with final correction
