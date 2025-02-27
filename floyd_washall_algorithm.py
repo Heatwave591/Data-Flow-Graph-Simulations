@@ -52,10 +52,10 @@ def generate_matrices_fixed_final(R1, n):
 inf = np.inf
 n = 4
 R1 = np.array([
-    [inf, inf, 1, inf],
-    [3, inf, 2, inf],
-    [-1, inf, inf, inf],
-    [0, 0, 0, inf]
+    [inf, inf, 7, 15],
+    [7, inf, inf, inf],
+    [inf, -2, inf, inf],
+    [inf, -2, inf, inf]
 ])
 
 # Generate matrices R2 to Rn with final correction
@@ -65,5 +65,7 @@ result_matrices_fixed_final = generate_matrices_fixed_final(R1, n)
 for i, matrix in enumerate(result_matrices_fixed_final, start=2):
     print(f"Matrix R{i}:")
     for row in matrix:
-        print("[" + ", ".join(["∞" if val == np.inf else str(int(val)) if val == int(val) else f"{val:.1f}" for val in row]) + "]")
+        print("[" + ", ".join(["inf" if val == np.inf else str(int(val)) if val == int(val) else f"{val:.1f}" for val in row]) + "]")
     print()
+
+# ∞
