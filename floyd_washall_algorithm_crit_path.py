@@ -45,7 +45,7 @@ t = np.array([1, 1, 2, 2])
 result_matrices = generate_matrices(R1, n, t)
 
 S = result_matrices[-1]
-print("Matrix S (final matrix):")
+print("S:")
 for row in S:
     print("[" + ", ".join(["inf" if val == np.inf else str(int(val)) if val == int(val) else f"{val:.1f}" for val in row]) + "]\n ")
 

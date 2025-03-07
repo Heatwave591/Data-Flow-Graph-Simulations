@@ -17,7 +17,7 @@ def get_connected_components(adj_matrix, u):
     
     def dfs(node, visited, component):
         visited[node] = True
-        component.append(node + 1)  # Convert to 1-based indexing
+        component.append(node + 1)  
         for next_node in adj_list[node]:
             if not visited[next_node]:
                 dfs(next_node, visited, component)
@@ -58,7 +58,7 @@ def get_subgraph_edges(adj_matrix, component):
     edges = []
     for i in component:
         for j in component:
-            if adj_matrix[i-1][j-1]:  # Convert back to 0-based indexing
+            if adj_matrix[i-1][j-1]:  
                 edges.append((i, j))
     return edges
 

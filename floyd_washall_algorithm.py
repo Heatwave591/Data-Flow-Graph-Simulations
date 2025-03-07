@@ -6,7 +6,7 @@ def generate_matrices_fixed_final(R1, n):
     while printing computation steps.
     
     Parameters:
-    R1 (numpy.ndarray): Initial n×n matrix
+    R1 (numpy.ndarray): Initial nxn matrix
     n (int): Size of the matrix
     
     Returns:
