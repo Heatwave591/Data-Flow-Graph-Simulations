@@ -23,25 +23,29 @@ void iterationBound(int graph[][100], int ref_node, int n) {
             F[i][j] = INF;
         }
     }
-    F[0][ref_node - 1] = 0;  // Distance from the reference node to itself is 0
+    F[0][ref_node - 1] = 0;
 
-    // DP computation: F[m][j] = min(F[m-1][i] + w_ij)
     for (int m = 1; m <= n; m++) {
         for (int j = 0; j < n; j++) {
-            // Carry forward the previous value as the starting point
             F[m][j] = F[m - 1][j];
+
             for (int i = 0; i < n; i++) {
-                if (graph[i][j] != INF) {  // Check if there is an edge
-                    int candidate = F[m - 1][i] + graph[i][j];
-                    if (candidate < F[m - 1][j]) {
-                        F[m][j] = candidate;  // Update with the smaller value
+                if (graph[i][j] != INF) {  
+                    int candidate = F[m][i] + graph[i][j];          // m-1 -> m
+
+                    if (candidate < F[m][j]) {            // Update if worse m-1 -> m
+                        F[m][j] = candidate;  
                     }
                 }
+
+                // else {
+                //     F[m][j] = INF;
+                
+                // }
             }
         }
     }
 
-    // Print intermediate vectors
     printf("\nIntermediate Vectors from Reference Node %d:\n", ref_node);
     for (int m = 0; m <= n; m++) {
         printf("m = %d: [", m);
