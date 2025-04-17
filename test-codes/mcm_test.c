@@ -31,9 +31,9 @@ void iterationBound(int graph[][100], int ref_node, int n) {
 
             for (int i = 0; i < n; i++) {
                 if (graph[i][j] != INF) {  
-                    int candidate = F[m][i] + graph[i][j];          // m-1 -> m
+                    int candidate = F[m-1][i] + graph[i][j];       
 
-                    if (candidate < F[m][j]) {            // Update if worse m-1 -> m
+                    if (candidate < F[m-1][j]) {            
                         F[m][j] = candidate;  
                     }
                 }
