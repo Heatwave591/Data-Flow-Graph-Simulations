@@ -34,13 +34,13 @@ def generate_matrices(R1, n, t):
 inf = np.inf
 n = 4
 R1 = np.array([
-    [inf, inf, 7, 15],
-    [7, inf, inf, inf],
+    [inf, inf, 10, 22],
+    [9, inf, inf, inf],
     [inf, -2, inf, inf],
     [inf, -2, inf, inf]
 ])
 
-t = np.array([1, 1, 2, 2])  
+t = np.array([1, 3, 2, 2])  
 
 result_matrices = generate_matrices(R1, n, t)
 

@@ -52,8 +52,8 @@ def generate_matrices_fixed_final(R1, n):
 inf = np.inf
 n = 4
 R1 = np.array([
-    [inf, inf, 7, 15],
-    [7, inf, inf, inf],
+    [inf, inf, 10, 22],
+    [9, inf, inf, inf],
     [inf, -2, inf, inf],
     [inf, -2, inf, inf]
 ])

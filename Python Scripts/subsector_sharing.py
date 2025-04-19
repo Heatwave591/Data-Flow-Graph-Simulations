@@ -2,12 +2,10 @@ import numpy as np
 import pandas as pd
 from itertools import combinations
 
-binary_coeffs = ['0011', '1010', '0111', '1111'] 
+binary_coeffs = ['0011','1010','0111','1111']
 
 max_len = max(len(b) for b in binary_coeffs)
 padded_binary = [b.zfill(max_len) for b in binary_coeffs]
-
-# BIN to INT string
 A = np.array([[int(bit) for bit in row] for row in padded_binary])
 
 iteration = 1
@@ -15,42 +13,55 @@ while True:
     print(f"\nIteration {iteration}\n")
     all_groups = []
 
-# Find sharing groups of rows
+    # Step 1: Find all row groups with ≥2 shared 1s
     for r in range(2, A.shape[0] + 1):
         for rows in combinations(range(A.shape[0]), r):
             subset = A[list(rows)]
             common_ones = np.sum(np.all(subset == 1, axis=0))
-            all_groups.append((rows, common_ones))
+            if common_ones >= 2:
+                all_groups.append((rows, common_ones))
 
-    valid_groups = [g for g in all_groups if g[1] >= 2]
-    if not valid_groups:
+    if not all_groups:
         break
 
-    max_size = max(len(g[0]) for g in valid_groups)
-    best_groups = [g[0] for g in valid_groups if len(g[0]) == max_size]
+    # Step 2: Pick the group with the most rows
+    max_row_count = max(len(g[0]) for g in all_groups)
+    best_groups = [g[0] for g in all_groups if len(g[0]) == max_row_count]
 
-    print("max ones shared by")
+    print("Group with max rows that share ≥2 ones:")
     for group in best_groups:
         print(group)
         subset = A[list(group)]
         shared_positions = np.where(np.all(subset == 1, axis=0))[0]
-        print(f"Shared ones = {shared_positions.tolist()}")
+        print(f"Shared positions: {shared_positions.tolist()}")
 
-        Pn = np.bitwise_xor.reduce(A[list(group)], axis=0)
-        print(f"Pn = {Pn.tolist()}")
+        print("Subset used for XOR:")
+        print(subset)
 
+        # Compute Pn from XOR
+        Pn = np.bitwise_xor.reduce(subset, axis=0)
+        print(f"Pn vector: {Pn.tolist()}")
+
+        # Zero out shared 1s in group rows
         shared_mask = np.zeros(A.shape[1], dtype=bool)
         shared_mask[shared_positions] = True
         for idx in group:
+            if not np.any(A[idx]):
+                continue
             A[idx, shared_mask] = 0
 
-        new_col = np.array([1 if i in group else 0 for i in range(A.shape[0])]).reshape(-1, 1)
-        A = np.hstack((A, new_col))
-        break  
+        # ✅ Create new P column with 1s for participating rows
+        pn_col = np.zeros((A.shape[0],), dtype=int)
+        for idx in group:
+            pn_col[idx] = 1
+        A = np.hstack((A, pn_col.reshape(-1, 1)))
+        break  # process only one group per iteration
 
+    print("Matrix after iteration:")
+    print(A)
     iteration += 1
 
-
+# Final matrix output
 print("\nFinal matrix\n")
 num_input_bits = max_len
 num_outputs = A.shape[1] - num_input_bits
