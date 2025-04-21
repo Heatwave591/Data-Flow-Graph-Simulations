@@ -2,7 +2,16 @@ import numpy as np
 import pandas as pd
 from itertools import combinations
 
-binary_coeffs = ['0011','1010','0111','1111']
+binary_coeffs = [
+    "11101111",
+    "11110001",
+    "11100001",
+    "10000001",
+    "10010001",
+    "10010111",
+    "00010011",
+    "00010001"
+    ]
 
 max_len = max(len(b) for b in binary_coeffs)
 padded_binary = [b.zfill(max_len) for b in binary_coeffs]
